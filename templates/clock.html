@@ -1,0 +1,243 @@
+
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head> 
+<meta charset="utf-8"> 
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>时钟</title>
+<style> 
+#myCanvas{ 
+  position:absolute;
+  left:50%;
+  margin-left:-250px;
+  border:0px solid #000; 
+  box-shadow: 0 0 10px rgba(0,0,0,0.2); 
+  background-color: rgb(58,179,255);
+  border-radius:120px;
+ }
+#demo{
+  
+  position:absolute;
+  left:5%;
+  bottom:10%;
+  
+}
+#color{
+  text-align:left;
+  width: 300px;
+  height: 60px;
+  border-radius:20px;
+}
+</style> 
+
+<body>
+{% if error %}
+    {{ error }}
+{% end %}
+
+<br>
+{% if username != 'no' %}
+    欢迎用户 {{ username }} 登陆<br>
+{% else %}
+     {% include "./06include.html" %}
+ {% end %}
+     <br>
+
+<canvas id="myCanvas" width="500px" height="500px">
+Your browser does not support the canvas element.
+</canvas>
+<br>
+<br>
+<div id="demo">
+  <input type="color" id="color" onclick="draw()">
+</div>
+<p id="s"></p>
+<script type="text/javascript">
+//获取画布
+var c=document.getElementById("myCanvas");
+//获取一个2D绘图环境((拿到一支笔)
+
+var cxt=c.getContext("2d");
+//画线
+//cxt.moveTo(10,10);
+//cxt.lineTo(150,50);
+//cxt.lineTo(10,50);
+//cxt.stroke();
+
+//画圆
+//cxt.beginPath()
+//cxt.fillStyle="#FF0000"
+//cxt.arc(70,18,15,0,Math.PI*2,true)
+//cxt.closePath()
+//cxt.fill()
+
+function draw(){
+//获取系统时间
+var now = new Date()
+var h = now.getHours()
+var m = now.getMinutes()
+var s = now.getSeconds()
+var color=document.getElementById("color").value
+if(18>h>7){
+  c.style.backgroundColor=color
+  //"#ffc1e0"
+  cxt.strokeStyle="#000"
+  cxt.fillStyle="#000"
+}
+else{
+  c.style.backgroundColor=color
+ // "#5b5b5b"
+  cxt.strokeStyle="#fff"
+  cxt.fillStyle="#fff"
+}
+
+h = h>12?h-12:h
+h = h+m/60
+//清楚画布，防止覆盖
+cxt.clearRect(0,0,500,500)
+
+//初始化画笔的样式
+//cxt.lineWidth=5; //设置线条的宽度
+//cxt.strokeStyle="#000"; //设置线条颜色
+
+
+//时钟内部背景颜色
+cxt.beginPath(); //开始新的绘图路径
+//设置填充颜色
+//cxt.fillStyle="#f0f0f0"
+//设置一个圆形路径
+//cxt.arc(250, 250, 150, 0, Math.PI*2, false)
+//绘制图形
+cxt.stroke()
+cxt.closePath(); //结束当前绘图路径
+cxt.fill() ; //填充
+
+
+
+//时钟
+
+//绘制数字
+cxt.font="36px Arial"
+//cxt.fillStyle="#000"
+cxt.textAlign="center"
+cxt.textBaseline="middle"
+for(var i=1; i<=12; i++){
+  cxt.beginPath()
+  cxt.save()
+  cxt.translate(250,250)
+  var theta=(i-3)*(Math.PI*2)/12
+  var x=250*0.65*Math.cos(theta)
+  var y=250*0.65*Math.sin(theta)
+  cxt.fillText(i, x, y)
+  cxt.restore()
+  cxt.closePath()
+}
+
+//绘制刻度(时刻度)
+for(var i=0; i<12; i++){
+  cxt.beginPath()
+  cxt.lineWidth = 6
+  //保存当前绘图环境
+  cxt.save()
+  //重置绘制启起始位置(将圆心位置重置为0,0)
+  cxt.translate(250,250)
+  //旋转画布到一定弧度 弧度=角度*PI/180
+  cxt.rotate(i*30*Math.PI/180)
+  //设置绘制线条的起始位置
+  cxt.moveTo(0,185)
+  //设置线条的结束位置
+  cxt.lineTo(0,200)
+  //绘制路径
+  cxt.stroke()
+  //还原初始的绘图环境
+  cxt.restore()
+  cxt.closePath()
+}
+
+//绘制刻度(分刻度)
+for(var i=0; i<60; i++){
+  cxt.beginPath()
+  cxt.lineWidth = 3
+  //保存当前绘图环境
+  cxt.save()
+  //重置绘制起始位置(将圆心位置重置为0,0)
+  cxt.translate(250,250)
+  //旋转画布到一定弧度, 弧度=角度*PI/180
+  cxt.rotate(i*6*Math.PI/180)
+  //设置绘制分刻度线条的起始位置
+  cxt.moveTo(0,185)
+  //设置线条的结束位置
+  cxt.lineTo(0,190)
+  //绘制路径
+  cxt.stroke()
+  //还原初始的绘图环境
+  cxt.restore()
+  cxt.closePath()
+}
+
+//绘制时针
+cxt.beginPath()
+cxt.lineWidth=12
+//保存当前绘图环境
+cxt.save()
+//重置绘制起始位置(将圆心位置重置为0，0)
+cxt.translate(250,250)
+//旋转画布到一定弧度, 弧度=角度*PI/180
+cxt.rotate(h*30*Math.PI/180)
+//设置线条的起始位置
+cxt.moveTo(0,0)
+//设置线条的结束位置
+cxt.lineTo(0,-130)
+//绘制路径
+cxt.stroke()
+//还原初始的绘图环境
+cxt.restore()
+cxt.closePath()
+
+
+//绘制分针
+cxt.beginPath()
+cxt.lineWidth=8
+//cxt.strokeStyle="#000"
+cxt.save()
+//重置绘制起始位置(将圆心位置重置为0.0)
+cxt.translate(250,250)
+//旋转画布到一定弧度, 弧度=角度*PI/180
+cxt.rotate(m*6*Math.PI/180)
+//设置绘制线条的起始位置
+cxt.moveTo(0,20)
+//设置线条的结束位置
+cxt.lineTo(0,-150)
+//绘制路径
+cxt.stroke()
+//还原初始的绘图环境
+cxt.restore()
+cxt.closePath()
+
+//绘制秒针
+cxt.beginPath()
+cxt.lineWidth=5
+cxt.strokeStyle="#f00"
+//保存当前绘图环境
+cxt.save()
+//重置绘制起始位置(将圆心位置重置为0.0)
+cxt.translate(250,250)
+//旋转画布到一定弧度, 弧度=角度*PI/180
+cxt.rotate(s*6*Math.PI/180)
+//设置绘制线条的起始位置
+cxt.moveTo(0,30)
+//设置线条结束位置
+cxt.lineTo(0,-180)
+//绘制路径
+cxt.stroke()
+//还原初始的绘图环境
+cxt.restore()
+cxt.closePath()
+
+
+}
+setInterval(draw, 1000)
+</script>
+</body>
+</html>

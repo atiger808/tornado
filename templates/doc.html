@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form type="post" action="/baike_crawl">
+    <input type="text" name="kw" placeholder="请输入词条" width="300px">
+    <input type="submit" value="搜索词条">
+</form>
+<span>文档列表</span><br>
+<div>
+    {% for i in article %}
+    <h2>{{ i[0] }}</h2>
+        {% for text in i[1] %}
+        <p>{{ text }}</p>
+        {% end %}
+    {% end %}
+</div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <meta name="keywords" content="关键词,关键字">
+    <meta name="description" content="描述信息">
+<style>
+    .search{ 
+        text-align:center;
+        font-size:20px;
+        }
+</style>
+</head>
+<body>
+<div class='search'>
+<form method="post" action="/tieba">
+    <p>搜索：<br><input type="'text" name="kw" placeholder='请输入关键词'></p>
+    <p>起始页:<br><input type='number' name='begin'></p>
+    <p>结束页:<br><input type='number' name='end'></p>
+    <p><input type="submit" value='GO'></p>
+</form>
+</div>
+<br>
+
+{% for i in d %}
+    {{ i[2] }}<a href="{{ i[0] }}" target="_blank">{{i[1]}}</a><br>
+{% end %}
+</body>
+</html>

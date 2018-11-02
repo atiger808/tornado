@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<style>
+body{background-color:"black";}
+</style>
+</head>
+<body>
+<canvas id="ball" width="1920px" height="1600px"></canvas>
+<script>
+//颜色函数
+function color(){
+var c=Array('#75BC4A', '#50732D', '#7028A9', '#8C61D0', '#269E5F', '#A389FE', '#24F987', '#023C17', '#584B17', '#642C13', '#2FC168', '#125BF9', '#BC3D95', '#468DCF', '#6CF370', '#C5D29F', '#C8EDF5', '#C87FDA', '#AC3628', '#13BCAD', '#6E3D09', '#E9268D', '#9D7F85', '#D298E4', '#9ABF05', '#35EA14', '#D0FAB8', '#D10ABF', '#4FBC08', '#81B5DA', '#198B64', '#D4CE6A', '#B657C1', '#EDFB60', '#4B937E', '#6B2401', '#3E0752', '#B52F4C', '#C16E2F', '#26D710', '#9C862E', '#9A5F8D', '#6D3875', '#694152', '#D695C3', '#49F67B', '#97E2D4', '#FB9A46', '#8D3471', '#60FD18', '#374E9A', '#3D7F91', '#5F6C40', '#F291DA', '#A346E9', '#EDF320', '#2679CE', '#B8ACD1', '#96D8C5', '#B720F8', '#B719A8', '#6CD0F5', '#A65B73', '#9D31F6', '#1570B9', '#6B4708', '#72A698', '#5197F8', '#04E2FD', '#6A72FB', '#125A6D', '#5D4062', '#3F10B5', '#3192E7', '#BC1A37', '#B782A9', '#8F5D26', '#E12A79', '#4FB568', '#B2F568', '#1D7BEA', '#A824B6', '#B346F7', '#E5F607', '#38BED9', '#EA3C72', '#470C2A', '#8B5091', '#A92583', '#EA7852', '#1D0C68', '#5DF9EC', '#AC7B48', '#12C5FB', '#87509B', '#713DB5', '#0B9A3E', '#810A3C', '#09F816', '#6791A3', '#6C4BA5', '#D5E14C', '#AD9ECF', '#F26E34', '#405E38', '#F75A28', '#4E1026', '#F641BE', '#2D01BE', '#FE49AC', '#907183', '#1BE84A', '#BE5F34', '#B7F301', '#B6549D', '#ED624C', '#70DC18', '#2706EA', '#83DB15', '#639048', '#2E8047', '#50AD97', '#AB7164', '#B8D547', '#F1329B', '#3FE76B', '#5CF463', '#DAE540', '#8C3627', '#CADFB2', '#3905D7', '#D6C8BF', '#D6BAF5', '#7340EF', '#C4B0EF', '#4078B1', '#49FA1C', '#C8E4DB', '#7FB1C8', '#021836', '#AF346B', '#63DE2B', '#CA7D0F', '#F49E85', '#596D0E', '#98D3AE', '#623F8D', '#B38052', '#B8D4A1', '#C1290A', '#948D16', '#B0972D', '#96D5C4', '#21E430', '#A41D9E', '#96F572', '#1EA479', '#CD36A2', '#42EF10', '#E25089', '#49EB1D', '#381962', '#50D89F', '#AC57B0', '#A85964', '#CE689B', '#C2F9A8', '#6CAD7B', '#37C415', '#48BF7D', '#B7C45D', '#45F10E', '#CAD705', '#6057F2', '#19E802', '#2B3749', '#3FCD24', '#8712E4', '#429F65', '#1805B9', '#5FD73C', '#A91B32', '#4A7218', '#FA5C71', '#A174F6', '#B61C79', '#2F8E05', '#B0EC79', '#F04C7D', '#0B19ED', '#C8D957', '#1CB957', '#39AC24', '#94F7E3', '#B2C584', '#AB425D', '#872B49', '#4315FA', '#4097A5', '#091DB4', '#063DB7', '#A2F3CD', '#15B3CD', '#6E14BC', '#24F170', '#CB538E', '#DBEF71', '#35CA26', '#C4BA23', '#B3569E', '#1CE650', '#1C9B87', '#5C67BA', '#A17309', '#A56893', '#A0FD36')
+return c[Math.ceil(Math.random()*256)]
+}
+function draw(){
+var c=document.getElementById("ball")
+//c.style.backgroundColor="#000"
+var cxt=c.getContext("2d")
+cxt.clearRect(0,0,1920,1600)
+//画圆
+for(var i=0;i<160;i++){
+cxt.beginPath()
+cxt.fillStyle=color()
+cxt.arc(Math.random()*1920,Math.random()*1600,Math.random()*80,0,Math.PI*2,true)
+cxt.closePath()
+cxt.fill()
+}
+}
+setInterval(draw,150)
+
+</script>
+</body>
+</html>

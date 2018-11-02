@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+#upload{
+  height:40px;
+  background-color:"#5bbbbb";
+  
+}
+#note{
+  left:30%;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  background-color:rgb(10, 220, 100);
+  border-radius:8px;
+  font-size:30px;
+}
+#form{
+  height:40px;
+  width:500px;
+}
+</style>
+<body>
+
+<div id="note">
+<h3>每日一句</h3>
+<hr>
+<span>{{ note[0] }}<br>
+{{ note[1] }}</span>
+<hr>
+</div>
+<div id="upload">
+<br>
+       <form id="form" method="post" action="/uploadfile" enctype="multipart/form-data">
+         
+        <input type="file" name="user_avatar" />
+                <input type="submit" value="上传图片" />
+        </form>
+ </div>
+<br>
+
+<table style="width:100%;">
+{% for row in range(rows) %}
+<tr>
+{% for i in urllist[row*4:row*4+4]%}
+ <td style="width:25%;"><img style="height: 250px;width:100%;" src="{{ i }}">
+ </td>  
+{% end %}
+</tr>
+{% end %}
+<tr>
+{% for j in urllist[4*rows: 4*rows+columns] %}
+ <td style="width:25%;"><img style="height: 250px;width:100%;" src="{{ j }}">
+{% end %}
+</tr>
+</table>
+</body>
+</html>

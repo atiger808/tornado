@@ -1,0 +1,11 @@
+{% extends "./04base.html" %}
+{% block title %} {{ username }} {% end %}
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% block body %}
+    {% if username != 'no' %}
+        欢迎用户 {{ username }} 登陆
+    {% else %}
+        {% include "./06include.html" %}
+    {% end %}
+{% end %}

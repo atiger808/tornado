@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>大华新闻</title>
+    <meta name="keywords" content="关键词,关键字">
+    <meta name="description" content="描述信息">
+
+<style>
+    .search{
+    text-align:center;
+    font-size:30px;
+    }
+    .price{
+    font-color:'#fff000';
+    background:'#FF5b5b';
+    }
+</style>
+</head>
+<body>
+
+<p><h1>大华新闻</h1></p>
+{% import pandas %}
+{% for i in df1%}
+  <a href="{{ i['url']}}">{{i["title"] }}</a><br>
+  {{ i["date"] }}<br>
+  {% end %}
+</body>
